@@ -1,8 +1,15 @@
 from tkinter import *
-from mypainter import *
+from tkinter import colorchooser
 
 color = 'black'  # 색상 초기화
 bold = False  # 펜 두께 초기화(False:가늘게, True:두껍게)
+
+
+def get_xy(x, y, b):  # 펜 두께(bold)에 따라 타원의 크기 결정
+    if b:
+        return x - 4, y - 4, x + 4, y + 4  # 타원의 좌표를 넓게 = 두껍게
+    else:
+        return x - 2, y - 2, x + 2, y + 2  # 타원의 좌표를 좁게 = 가늘게
 
 
 def draw(event):
@@ -16,12 +23,13 @@ def clear_canvas():
 
 def change_color():
     global color
-    color = get_color()  # 색상 선택 함수 호출
+    color = colorchooser.askcolor()
+    color = color[1]  # 색상 선택 함수 호출
 
 
 def change_bold():
     global bold
-    bold = not (bold)  # 버튼을 누를 때마다 '두껍게↔가늘게'가 전환
+    bold = not bold  # 버튼을 누를 때마다 '두껍게 ↔ 가늘게' 가 전환
 
 
 w = Tk()
